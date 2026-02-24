@@ -56,6 +56,15 @@ pipeline {
             }
         }
 
+        stage('Current user'){
+            steps{
+                bat """
+                whoami
+                echo %USERPROFILE%
+                """
+            }
+        }
+
         stage('Deploy to Kubernetes') {
             steps {
                 powershell """
