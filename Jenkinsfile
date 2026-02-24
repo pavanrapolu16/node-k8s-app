@@ -43,19 +43,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Start Minikube if not running') {
-            steps {
-                bat """
-                minikube status | findstr /C:"Running"
-                IF %ERRORLEVEL% NEQ 0 (
-                    echo Minikube is not running. Starting now...
-                    minikube start --driver=docker --memory=2048 --cpus=2
-                )
-                """
-            }
-        }
-
+        
         stage('Current user'){
             steps{
                 bat """
@@ -65,6 +53,18 @@ pipeline {
             }
         }
 
+        // stage('Start Minikube if not running') {
+        //     steps {
+        //         bat """
+        //         minikube status | findstr /C:"Running"
+        //         IF %ERRORLEVEL% NEQ 0 (
+        //             echo Minikube is not running. Starting now...
+        //             minikube start --driver=docker --memory=2048 --cpus=2
+        //         )
+        //         """
+        //     }
+        // }
+        
         stage('Deploy to Kubernetes') {
             steps {
                 powershell """
