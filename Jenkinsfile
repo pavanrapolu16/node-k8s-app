@@ -72,5 +72,27 @@ pipeline {
                 """
             }
         }
+
+        stage('Verify Deployment') {
+            steps {
+                bat """
+                echo ===== Pods =====
+                minikube kubectl -- get pods
+
+                echo ===== Services =====
+                minikube kubectl -- get svc
+                """
+            }
+        }
+
+        stage('Get Service URL') {
+            steps {
+                bat """
+                echo ===== Application URL =====
+                minikube service %SERVICE_NAME% --url
+                """
+            }
+        }
+
     }
 }
