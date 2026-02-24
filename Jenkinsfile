@@ -64,6 +64,11 @@ pipeline {
         //         """
         //     }
         // }
+        stage('Start Minikube') {
+            steps {
+                bat 'minikube start --driver=docker'
+            }
+        }
         
         stage('Deploy to Kubernetes') {
             steps {
